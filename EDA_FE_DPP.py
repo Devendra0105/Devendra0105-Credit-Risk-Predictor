@@ -34,8 +34,8 @@ print(df.columns)
 new=pd.get_dummies(df.drop('target',axis=1))
 new['target']=df['target'].copy()
 new['target']=new['target'].map({
-    'good':1,
-    'bad':0
+    'good':0,
+    'bad':1
 })
 # print(new.columns.tolist())
 # print(new.describe())
@@ -80,7 +80,7 @@ model.fit(X_train_scaled,y_train)
 
 pred=model.predict_proba(X_test_scaled)[:,1]
 pred2=model.predict_proba(X_train_scaled)[:,1]
-threshold=0.55
+threshold=0.37
 
 pred=(pred>threshold).astype(int)
 pred2=(pred2>threshold).astype(int)
