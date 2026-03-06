@@ -1,0 +1,6 @@
+required libraries and tools 
+1. pandas
+2. sklearn 
+3. XGBOOST
+4. python 
+5. VS-Code or jupyterNotebook 

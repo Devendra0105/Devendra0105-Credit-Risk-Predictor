@@ -3,7 +3,6 @@ used to understand data and make it good for macchine learning  '''
 def EDA_part():
 
     import pandas as pd
-    import numpy as np
     data=pd.read_csv('dataset/german_credit_data.csv')
     df=pd.DataFrame(data)
     '''
