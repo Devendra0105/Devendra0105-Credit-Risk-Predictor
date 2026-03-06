@@ -187,7 +187,7 @@ grid=GridSearchCV(
     GB,
     param_grid,
     cv=5,
-    scoring='f1_macro',
+    scoring='recall',
     n_jobs=-1
 )
 
