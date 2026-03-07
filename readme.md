@@ -77,11 +77,22 @@ Models were evaluated using the following metrics:
 Example:
 
 ```
-Accuracy: 0.78
+Model Accuracy :  77.0
+confusion Matrix :
+ [[111  30]
+ [ 16  43]]
 
-Confusion Matrix:
-[[112 29]
- [15 44]]
+Classification Report:
+               precision    recall  f1-score   support
+
+           0       0.87      0.79      0.83       141
+           1       0.59      0.73      0.65        59
+
+    accuracy                           0.77       200
+   macro avg       0.73      0.76      0.74       200
+weighted avg       0.79      0.77      0.78       200
+
+ROC AUC Score:  75.80238009376127
 ```
 
 ---
