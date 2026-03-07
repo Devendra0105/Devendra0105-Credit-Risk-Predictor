@@ -1,4 +1,3 @@
-from EDA import EDA_part
 import pandas as pd
 from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
 from sklearn.svm import SVC
@@ -7,10 +6,10 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, roc_auc_score, roc_curve
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
-
+import streamlit 
+import joblib
 data=pd.read_csv('dataset/german_credit_data.csv')
 df=pd.DataFrame(data)
-print(df.columns.tolist())
 df[['gender','martial Status']]=df['status_and_sex'].str.split(' : ',expand=True)
 df.drop('status_and_sex',axis=1, inplace=True)
 df['target']=df['target'].map({
@@ -43,8 +42,6 @@ print('confusion Matrix : \n',confusion_matrix(y_test,pred))
 print('\nClassification Report: \n',classification_report(y_test,pred))
 print('ROC AUC Score: ',roc_auc_score(y_test,pred)*100)
 
-pred=pipeline.predict(X_train)
-print('Model Accuracy : ',accuracy_score(y_train,pred)*100)
-print('confusion Matrix : \n',confusion_matrix(y_train,pred))
-print('\nClassification Report: \n',classification_report(y_train,pred))
-print('ROC AUC Score: ',roc_auc_score(y_train,pred)*100)
+joblib.dump(pipeline,'EDA and ML/PKL/Model.pkl')
+joblib.dump(preprocessing,'EDA and ML/PKL/preprocessing.pkl')
+joblib.dump(X.columns.tolist(), "EDA and ML/PKL/features.pkl")
