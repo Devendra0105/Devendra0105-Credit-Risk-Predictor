@@ -128,16 +128,14 @@ st.markdown("---")
 
 if st.button("🔮 Predict Credit Risk", type="primary"):
     pred = model.predict(input_df)[0]
-    prob = model.predict_proba(input_df)[0][1] * 100
     
     st.subheader("Result")
     
     if pred == 1:
-        st.error(f"⚠️ HIGH RISK ({prob:.1f}% probability)")
+        st.error(f"⚠️ HIGH RISK probability)")
     else:
-        st.success(f"✅ LOW RISK ({prob:.1f}% probability)")
-    
-    st.progress(prob / 100)
+        st.success(f"✅ LOW RISK probability)")
+
     
     st.info("💡 This is a ML prediction - use as guidance only!")
 
