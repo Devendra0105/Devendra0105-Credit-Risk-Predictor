@@ -1,5 +1,5 @@
 '''This file contains grid searcch CV method used to find best model that do not overfit and gives high accuracy and recall '''
-from EDA import EDA_part
+
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
 from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
@@ -10,8 +10,19 @@ from sklearn.linear_model import LogisticRegression
 from xgboost import XGBClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, roc_auc_score
 from sklearn.preprocessing import StandardScaler
+import pandas as pd 
+data=pd.read_csv('dataset/german_credit_data.csv')
 
-new=EDA_part()
+df=pd.DataFrame(data)
+df[['gender','martial Status']]=df['status_and_sex'].str.split(' : ',expand=True)
+df.drop('status_and_sex',axis=1, inplace=True)
+df['target']=df['target'].map({
+        'good':0,
+        'bad':1
+    })
+
+new=pd.get_dummies(df)
+
 X=new.drop('target',axis=1)
 y=new['target']
 X_train,X_test,y_train,y_test=train_test_split(X,y, test_size=0.2, random_state=42)
