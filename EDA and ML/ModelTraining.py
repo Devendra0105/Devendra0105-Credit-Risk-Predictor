@@ -20,7 +20,7 @@ df['target']=df['target'].map({
 X=df.drop('target',axis=1)
 y=df['target']
 num_features=['month_duration','credit_amount','n_guarantors','payment_to_income_ratio','residence_since','n_credits','age' ]
-col_features=['status_account','is_foreign_worker','telephone','job','housing','collateral','collateral','gender','secondary_obligor','years_employment','status_savings','purpose','credit_history','other_installment_plans','martial Status']
+col_features=['status_account','is_foreign_worker','telephone','job','housing','collateral','gender','secondary_obligor','years_employment','status_savings','purpose','credit_history','other_installment_plans','martial Status']
 
 preprocessing=ColumnTransformer([
     ('col',OneHotEncoder(handle_unknown='ignore'),col_features),
@@ -40,7 +40,8 @@ pred=pipeline.predict(X_test)
 print('Model Accuracy : ',accuracy_score(y_test,pred)*100)
 print('confusion Matrix : \n',confusion_matrix(y_test,pred))
 print('\nClassification Report: \n',classification_report(y_test,pred))
-print('ROC AUC Score: ',roc_auc_score(y_test,pred)*100)
+proba = pipeline.predict_proba(X_test)[:,1]
+print('ROC AUC Score: ',roc_auc_score(y_test,proba)*100)
 
 joblib.dump(pipeline,'EDA and ML/PKL/Model.pkl')
 joblib.dump(preprocessing,'EDA and ML/PKL/preprocessing.pkl')
