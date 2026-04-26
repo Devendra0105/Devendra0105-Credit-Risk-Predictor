@@ -31,7 +31,6 @@ pipeline=Pipeline([
     ('model',SVC(kernel='rbf',gamma='scale',C=2.2,random_state=42,class_weight={0:1,1:3},probability=True))
 ])
 
-
 X_train,X_test,y_train,y_test=train_test_split(X,y,random_state=42, test_size=0.2)
 
 pipeline.fit(X_train,y_train) 

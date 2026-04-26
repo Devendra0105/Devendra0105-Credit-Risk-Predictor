@@ -1,10 +1,16 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import os
+
+# Resolve paths relative to this script
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "..", "EDA and ML", "PKL", "Model.pkl")
+FEATURES_PATH = os.path.join(BASE_DIR, "..", "EDA and ML", "PKL", "features.pkl")
 
 # Load model and features
-model = joblib.load("EDA and ML/PKL/Model.pkl")
-features = joblib.load("EDA and ML/PKL/features.pkl")
+model = joblib.load(MODEL_PATH)
+features = joblib.load(FEATURES_PATH)
 
 st.set_page_config(page_title="Credit Risk Predictor", page_icon="💳")
 
