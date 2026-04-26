@@ -60,15 +60,15 @@ python ModelTraining.py
 
 ## Models Evaluated
 
-| Model | Accuracy |
-|-------|----------|
-| Logistic Regression | 0.775 |
-| Random Forest | 0.780 |
-| **SVC (RBF)** | **~0.82** |
-| Decision Tree | 0.75 |
-| KNN | 0.73 |
-| XGBoost | 0.805 |
-| Gradient Boosting | 0.795 |
+|        Model        | Accuracy |
+|---------------------|----------|
+| Logistic Regression | 0.775    |
+| Random Forest       | 0.780    |
+| **SVC (RBF)**       | **~0.82**|
+| Decision Tree       | 0.75     |
+| KNN                 | 0.73     |
+| XGBoost             | 0.805    |
+| Gradient Boosting   | 0.795    |
 
 ## Tech Stack
 
@@ -82,3 +82,4 @@ python ModelTraining.py
 ---
 *Credit Risk Prediction Project*
 
+`` This project is developed for learning and demonstration purposes; while the model shows reasonable performance, it is not intended for deployment in real-world banking systems, it is a learning-oriented project designed to explore machine learning techniques in credit risk prediction; despite promising results, it is not production-ready for real banking applications. ``
