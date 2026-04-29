@@ -101,6 +101,14 @@ with c5:
 with c6:
     secondary_obligor = st.selectbox("Secondary Obligor", list(maps["secondary_obligor"].keys()), index=0)
     
+gender, marital = status_and_sex.split(" : ")
+
+# correct secondary obligor mapping (dataset format)
+secondary_map = {
+    "none": "A101",
+    "co-applicant": "A102",
+    "guarantor": "A103"
+}
 # --- BUILD INPUT DATA ---
 data = {
     "status_account": maps["status_account"][status_account],
@@ -111,7 +119,7 @@ data = {
     "status_savings": maps["status_savings"][status_savings],
     "years_employment": maps["years_employment"][years_employment],
     "payment_to_income_ratio": payment_ratio,
-    "gender": maps["status_and_sex"][status_and_sex],  # mapped from status_and_sex
+    "gender": gender,  # FIXED
     "n_guarantors": n_guarantors,
     "residence_since": residence_since,
     "collateral": maps["collateral"][collateral],
@@ -120,28 +128,35 @@ data = {
     "housing": maps["housing"][housing],
     "n_credits": n_credits,
     "job": maps["job"][job],
-    "martial Status": maps["status_and_sex"][status_and_sex],  # same as gender for encoding
+    "martial Status": marital,  # FIXED
     "telephone": maps["telephone"][telephone],
     "is_foreign_worker": maps["is_foreign_worker"][is_foreign_worker],
-    "secondary_obligor": maps["secondary_obligor"][secondary_obligor]
+    "secondary_obligor": secondary_map[secondary_obligor]  # FIXED
 }
 
 # Ensure correct column order
-input_df = pd.DataFrame([data])[features]
+input_df = pd.DataFrame([data])
+input_df=input_df[features]
 
 # --- PREDICTION ---
 st.markdown("---")
 
 if st.button("🔮 Predict Credit Risk", type="primary"):
-    pred = model.predict(input_df)[0]
     
+    proba = model.predict_proba(input_df)[0]
+    bad_prob = proba[1] * 100   # % form
+
     st.subheader("Result")
-    
-    if pred == 1:
-        st.error(f"⚠️ HIGH RISK probability)")
+
+    # 🔥 NEW LOGIC ONLY
+    if bad_prob > 30:
+        st.error(f"🔴 HIGH RISK\nProbability: {bad_prob:.2f}%")
+    elif bad_prob > 20:
+        st.warning(f"🟠 MEDIUM RISK\nProbability: {bad_prob:.2f}%")
     else:
-        st.success(f"✅ LOW RISK probability)")
+        st.success(f"🟢 LOW RISK\nProbability: {100 - bad_prob:.2f}%")
 
-    
-    st.info("💡 This is a ML prediction - use as guidance only!")
-
+    # Debug
+    with st.expander("🔍 Debug Info"):
+        st.write("Probabilities [Good, Bad]:", proba)
+        st.write("Bad Probability:", bad_prob)

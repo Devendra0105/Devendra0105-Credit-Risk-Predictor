@@ -6,7 +6,8 @@ A machine learning project to predict credit risk using the German Credit Datase
 
 ```
 ├── APP/
-│   └── app.py                 # Streamlit application for predictions
+│   |── app.py                 # Streamlit application for predictions
+|   └── test.py                # sample file for testing given data 
 ├── dataset/
 │   └── german_credit_data.csv # Original dataset
 ├── EDA and ML/
@@ -15,13 +16,17 @@ A machine learning project to predict credit risk using the German Credit Datase
 │   ├── ModelTraining.py       # Model training and evaluation
 │   └── PKL/
 │       ├── features.pkl       # Feature order
-│       └── Model.pkl          # Trained SVC model
+│       |── Model.pkl          # Trained SVC model
+|       |── pipeline.pkl       # pipeline structure
+|       └── preprocessing.pkl  # data preprocessing package for individual preprocessing (in case of emg.)
 ├── test_results/
 │   ├── balanced_500_data.csv
 │   ├── output_500.txt
 │   └── test_500_balanced.py
 ├── About_Model.md             # Model documentation and reports
-└── requirments.txt            # Required libraries
+|── requirments.txt            # Required libraries
+└── README.MD                  # Readme file 
+
 ```
 
 ## Features
